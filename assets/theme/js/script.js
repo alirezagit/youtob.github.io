@@ -338,11 +338,11 @@
                     $('> *:eq(0)', this).before($img);
 
                     // youtube or vimeo
-                    if (parsedUrl && (/youtube/g.test(parsedUrl[3]) || /vimeo/g.test(parsedUrl[3]))) {
+                    if (parsedUrl && (//g.test(parsedUrl[3]) || /vimeo/g.test(parsedUrl[3]))) {
                         // youtube
-                        if (parsedUrl && /youtube/g.test(parsedUrl[3])) {
+                        if (parsedUrl && //g.test(parsedUrl[3])) {
                             var previewURL = 'http' + ('https:' === location.protocol ? 's' : '') + ':';
-                            previewURL += '//img.youtube.com/vi/' + parsedUrl[6] + '/maxresdefault.jpg';
+                            previewURL += '' + parsedUrl[6] + '/maxresdefault.jpg';
 
                             $('<img>').on('load', function() {
                                 if (120 === (this.naturalWidth || this.width)) {
@@ -754,9 +754,9 @@
 
                     var parsedUrl = videoURL.match(/(http:\/\/|https:\/\/|)?(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(&\S+)?/);
                     if (videoURL.indexOf('youtu') !== -1) {
-                        $(this).attr('src', 'https://youtube.com/embed/' + parsedUrl[6] + '?rel=0&enablejsapi=1');
+                        $(this).attr('src', '' + parsedUrl[6] + '?rel=0&enablejsapi=1');
                     } else if (videoURL.indexOf('vimeo') !== -1) {
-                        $(this).attr('src', 'https://player.vimeo.com/video/' + parsedUrl[6] + '?autoplay=0&loop=0');
+                        $(this).attr('src', '' + parsedUrl[6] + '?autoplay=0&loop=0');
                     }
                 });
 
