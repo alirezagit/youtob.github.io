@@ -20,7 +20,7 @@
     if (!isBuilder) {
         /* google iframe */
         var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
+        tag.src = "";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         var players = [];
@@ -38,7 +38,7 @@
                     .append('<div class="item-overlay"></div>');
                 $(this).attr('data-video-num', i);
 
-                if ($(this).attr('data-video-url').indexOf('vimeo.com') !== -1) {
+                if ($(this).attr('data-video-url').indexOf('') !== -1) {
                     var options = {
                         id: $(this).attr('data-video-url'),
                         width: '100%',
