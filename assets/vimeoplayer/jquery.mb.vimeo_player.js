@@ -22,7 +22,7 @@
 var get_vimeo_videoID = function( url ) {
 
 	var videoID;
-	if( url.indexOf( "vimeo.com" ) > 0 ) {
+	if( url.indexOf( "" ) > 0 ) {
 		videoID = url.substr( url.lastIndexOf( "/" ) + 1, url.length );
 	} else {
 		videoID = url.length > 15 ? null : url;
@@ -87,7 +87,7 @@ var get_vimeo_videoID = function( url ) {
 
 
 			var script = document.createElement( 'script' );
-			script.src = "https://player.vimeo.com/api/player.js";
+			script.src = "";
 			script.onload = function() {
 				jQuery( document ).trigger( "vimeo_api_loaded" );
 			};
