@@ -26,13 +26,13 @@
     }
 
     function getYTPreviewUrl(videoId, quality) {
-        return 'https://img.youtube.com/vi/' + videoId + '/' +
+        return '' + videoId + '/' +
             (quality || '') + 'default.jpg';
     }
 
     function getVimeoPreviewUrl(vimeoId, callback) {
         var request = new XMLHttpRequest();
-        request.open('GET', 'https://vimeo.com/api/v2/video/' + vimeoId + '.json', true);
+        request.open('GET', '' + vimeoId + '.json', true);
         request.onreadystatechange = function() {
             if (this.readyState === 4) {
                 if (this.status >= 200 && this.status < 400) {
