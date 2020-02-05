@@ -22,6 +22,14 @@ $("#inputid").on('paste', function(event) {
   $(event.target).keyup();
 });
 
+$("#inputid").on('change', function(event) {
+  $(event.target).keyup();
+});
+
+$("#inputid").on('input', function(event) {
+  $(event.target).keyup();
+});
+
 function makeid(length) { 
 var result = '';
 var characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ123456789';
