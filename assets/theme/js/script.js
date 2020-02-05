@@ -323,102 +323,10 @@
                     $(window).resize();
             });
 
-            // background video
-            function videoParser(card) {
-                $(card).outerFind('[data-bg-video]').each(function() {
-                    var videoURL = $(this).attr('data-bg-video');
-                    var parsedUrl = videoURL.match(/(http:\/\/|https:\/\/|)?(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(&\S+)?/);
-
-                    var $img = $('<div class="mbr-background-video-preview">')
-                        .hide()
-                        .css({
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center'
-                        });
-                    $('> *:eq(0)', this).before($img);
-
-                    // youtube or vimeo
-                    if (parsedUrl && (//g.test(parsedUrl[3]) || /vimeo/g.test(parsedUrl[3]))) {
-                        // youtube
-                        if (parsedUrl && //g.test(parsedUrl[3])) {
-                            var previewURL = 'http' + ('https:' === location.protocol ? 's' : '') + ':';
-                            previewURL += '' + parsedUrl[6] + '/maxresdefault.jpg';
-
-                            $('<img>').on('load', function() {
-                                if (120 === (this.naturalWidth || this.width)) {
-                                    // selection of preview in the best quality
-                                    var file = this.src.split('/').pop();
-
-                                    switch (file) {
-                                        case 'maxresdefault.jpg':
-                                            this.src = this.src.replace(file, 'sddefault.jpg');
-                                            break;
-                                        case 'sddefault.jpg':
-                                            this.src = this.src.replace(file, 'hqdefault.jpg');
-                                            break;
-                                        default: // image not found
-                                            if (isBuilder) {
-                                                $img.css('background-image', 'url("images/no-video.jpg")')
-                                                    .show();
-                                            }
-                                    }
-                                } else {
-                                    $img.css('background-image', 'url("' + this.src + '")')
-                                        .show();
-                                }
-                            }).attr('src', previewURL);
-
-                            if ($.fn.YTPlayer && !isBuilder && !$.isMobile()) {
-                                $('> *:eq(1)', this).before('<div class="mbr-background-video"></div>').prev()
-                                    .YTPlayer({
-                                        videoURL: parsedUrl[6],
-                                        containment: 'self',
-                                        showControls: false,
-                                        mute: true
-                                    });
-                            }
-                        } else if (parsedUrl && /vimeo/g.test(parsedUrl[3])) { // vimeo
-                            var request = new XMLHttpRequest();
-                            request.open('GET', 'https://vimeo.com/api/v2/video/' + parsedUrl[6] + '.json', true);
-                            request.onreadystatechange = function() {
-                                if (this.readyState === 4) {
-                                    if (this.status >= 200 && this.status < 400) {
-                                        var response = JSON.parse(this.responseText);
-
-                                        $img.css('background-image', 'url("' + response[0].thumbnail_large + '")')
-                                            .show();
-                                    } else if (isBuilder) { // image not found
-                                        $img.css('background-image', 'url("images/no-video.jpg")')
-                                            .show();
-                                    }
-                                }
-                            };
-                            request.send();
-                            request = null;
-
-                            if ($.fn.vimeo_player && !isBuilder && !$.isMobile()) {
-                                $('> *:eq(1)', this).before('<div class="mbr-background-video"></div>').prev()
-                                    .vimeo_player({
-                                        videoURL: videoURL,
-                                        containment: 'self',
-                                        showControls: false,
-                                        mute: true
-                                    });
-                            }
-                        }
-                    } else if (isBuilder) { // neither youtube nor vimeo
-                        $img.css('background-image', 'url("images/video-placeholder.jpg")')
-                            .show();
-                    }
-                });
-            }
-
             if (isBuilder) {
                 $(document).on('add.cards', function(event) {
-                    videoParser(event.target);
                 });
             } else {
-                videoParser(document.body);
             }
 
             $(document).on('changeParameter.cards', function(event, paramName, value, key) {
@@ -427,13 +335,11 @@
                         case 'type':
                             $(event.target).find('.mbr-background-video-preview').remove();
                             if (value.type === 'video') {
-                                videoParser(event.target);
                             }
                             break;
                         case 'value':
                             if (value.type === 'video') {
                                 $(event.target).find('.mbr-background-video-preview').remove();
-                                videoParser(event.target);
                             }
                             break;
                     }
@@ -712,59 +618,6 @@
                 }
             });
         }
-
-        // Script for popUp video
-        $(document).ready(function() {
-            if (!isBuilder) {
-                var modal = function(item) {
-                    var videoIframe = $(item).parents('section').find('iframe')[0],
-                        videoIframeSrc = $(videoIframe).attr('src');
-
-                    item.parents('section').css('z-index', '5000');
-
-                    if (videoIframeSrc.indexOf('youtu') !== -1) {
-                        videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                    }
-
-                    if (videoIframeSrc.indexOf('vimeo') !== -1) {
-                        var vimeoPlayer = new Vimeo.Player($(videoIframe));
-                        vimeoPlayer.play();
-                    }
-
-                    $(item).parents('section').find($(item).attr('data-modal'))
-                        .css('display', 'table')
-                        .click(function() {
-                            if (videoIframeSrc.indexOf('youtu') !== -1) {
-                                videoIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                            }
-
-                            if (videoIframeSrc.indexOf('vimeo') !== -1) {
-                                vimeoPlayer.pause();
-                            }
-
-                            $(this).css('display', 'none').off('click');
-                            item.parents('section').css('z-index', '0');
-                        });
-                };
-
-                // Youtube & Vimeo
-                $('.modalWindow-video iframe').each(function() {
-                    var videoURL = $(this).attr('data-src');
-                    $(this).removeAttr('data-src');
-
-                    var parsedUrl = videoURL.match(/(http:\/\/|https:\/\/|)?(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(&\S+)?/);
-                    if (videoURL.indexOf('youtu') !== -1) {
-                        $(this).attr('src', '' + parsedUrl[6] + '?rel=0&enablejsapi=1');
-                    } else if (videoURL.indexOf('vimeo') !== -1) {
-                        $(this).attr('src', '' + parsedUrl[6] + '?autoplay=0&loop=0');
-                    }
-                });
-
-                $('[data-modal]').click(function() {
-                    modal($(this));
-                });
-            }
-        });
 
         if (!isBuilder) {
             // open dropdown menu on hover
