@@ -25,7 +25,19 @@ $.ajax({
 type: "POST",
 url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLScIuk7kTrCveD4XrkgZ3qk05d_1qKGQ5RQ_EQAHEgMoFQSgvA/formResponse",
 data: dataString,
-complete: Exec
+beforeSend: function() {
+    ldbtn2.toggle();
+},
+complete: function(data) {
+    alertify.alert()
+    .setting({
+    'title':'یوتاب',
+    'label':'تایید',
+    'message': 'اطلاعات شما با موفقیت در سامانه یوتاب ثبت گردید و کد کاربری از طریق ایمیل برایتان ارسال شد. از شما صمیمانه سپاسگزاریم',
+    'onok': function(){ location.reload(); }
+    }).show();
+    ldbtn2.toggle();
+}
 });
 }
 form.classList.add('was-validated');
@@ -34,9 +46,4 @@ form.classList.add('was-validated');
 }, false);
 })();
 
-function Exec() {
-	alert("اطلاعات شما با موفقیت در سامانه یوتاب ثبت گردید و کد کاربری از طریق ایمیل برایتان ارسال شد. از شما صمیمانه سپاسگزاریم");
-	$('#modal').modal('toggle');
-	$('#register-form')[0].reset();
-	location.reload()
-}
+var ldbtn2 = new ldLoader({root: "#register-btn"});
