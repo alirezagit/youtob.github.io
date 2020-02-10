@@ -1337,6 +1337,38 @@ section.lazy-placeholder:after {
   text-align: center;
   color: #000000;
 }
+.cid-rPCPGqia8I {
+  padding-top: 90px;
+  padding-bottom: 90px;
+  background: linear-gradient(45deg, #cebfaf, #cebfaf);
+}
+@media (min-width: 992px) {
+  .cid-rPCPGqia8I .mbr-figure {
+    padding-left: 4rem;
+  }
+}
+@media (max-width: 991px) {
+  .cid-rPCPGqia8I .mbr-figure {
+    padding-top: 3rem;
+  }
+}
+.cid-rPCPGqia8I .media-container-row {
+  flex-direction: row-reverse;
+  -webkit-flex-direction: row-reverse;
+}
+@media (min-width: 992px) {
+  .cid-rPCPGqia8I .media-container-row .mbr-figure {
+    padding-left: 0;
+    padding-right: 4rem;
+  }
+}
+.cid-rPCPGqia8I .mbr-text,
+.cid-rPCPGqia8I .mbr-section-btn {
+  color: #000000;
+}
+.cid-rPCPGqia8I .mbr-section-title {
+  color: #000000;
+}
 .cid-rDs9PQZA4E {
   padding-top: 45px;
   padding-bottom: 75px;
@@ -1658,6 +1690,11 @@ section.lazy-placeholder:after {
 }
 .cid-rDs2pemzpU .social-list a:focus {
   text-decoration: none;
+}
+.cid-rQ0s0deRyj {
+  padding-top: 0px;
+  padding-bottom: 15px;
+  background-color: #232323;
 }
 .cid-rDxlxfLx3J {
   padding-top: 135px;
@@ -2256,6 +2293,11 @@ section.lazy-placeholder:after {
 .cid-rE1y2lSwwv .dropdown-item:hover {
   color: #c1c1c1 !important;
 }
+.cid-rQ0s0deRyj {
+  padding-top: 0px;
+  padding-bottom: 15px;
+  background-color: #232323;
+}
 .cid-rDypC7SRzi {
   padding-top: 135px;
   padding-bottom: 90px;
@@ -2781,6 +2823,11 @@ section.lazy-placeholder:after {
 .cid-rE1y2lSwwv .dropdown-item:hover {
   color: #c1c1c1 !important;
 }
+.cid-rQ0s0deRyj {
+  padding-top: 0px;
+  padding-bottom: 15px;
+  background-color: #232323;
+}
 .cid-rE1y2lSwwv .navbar {
   padding: .5rem 0;
   background: #149dcc;
@@ -3259,6 +3306,11 @@ section.lazy-placeholder:after {
 }
 .cid-rKlCO26yyr .social-list a:focus {
   text-decoration: none;
+}
+.cid-rQ0s0deRyj {
+  padding-top: 0px;
+  padding-bottom: 15px;
+  background-color: #232323;
 }
 .cid-rE1y2lSwwv .navbar {
   padding: .5rem 0;
@@ -3746,6 +3798,11 @@ section.lazy-placeholder:after {
 .cid-rOBc8VTUnb .social-list a:focus {
   text-decoration: none;
 }
+.cid-rQ0s0deRyj {
+  padding-top: 0px;
+  padding-bottom: 15px;
+  background-color: #232323;
+}
 .cid-rE1y2lSwwv .navbar {
   padding: .5rem 0;
   background: #149dcc;
@@ -4224,4 +4281,9 @@ section.lazy-placeholder:after {
 }
 .cid-rOBb2pmfd2 .social-list a:focus {
   text-decoration: none;
+}
+.cid-rQ0s0deRyj {
+  padding-top: 0px;
+  padding-bottom: 15px;
+  background-color: #232323;
 }
