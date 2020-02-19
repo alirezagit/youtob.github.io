@@ -16,7 +16,6 @@ form.addEventListener('submit', function(event) {
 if (form.checkValidity() === false) {
 event.preventDefault();
 event.stopPropagation();
-toggleFail;
 }
 if (form.checkValidity() === true) {
 event.preventDefault(); // to prevent default page reloading
