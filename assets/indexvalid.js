@@ -16,6 +16,7 @@ form.addEventListener('submit', function(event) {
 if (form.checkValidity() === false) {
 event.preventDefault();
 event.stopPropagation();
+toggleFail();
 }
 if (form.checkValidity() === true) {
 event.preventDefault(); // to prevent default page reloading
@@ -43,4 +44,8 @@ var ldbtn = new ldLoader({root: "#submit-form"});
 
 function toggleAlert() {
 	alertify.success('پیام شما با موفقیت ارسال گردید. با تشکر');
+}
+
+function toggleFail() {
+	alertify.danger('خطا! لطفا همه کادرها را کامل نمایید');
 }
