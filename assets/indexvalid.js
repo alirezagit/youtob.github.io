@@ -15,8 +15,8 @@ var validation = Array.prototype.filter.call(forms, function(form) {
 form.addEventListener('submit', function(event) {
 if (form.checkValidity() === false) {
 event.preventDefault();
-toggleFail();
 event.stopPropagation();
+toggleFail;
 }
 if (form.checkValidity() === true) {
 event.preventDefault(); // to prevent default page reloading
