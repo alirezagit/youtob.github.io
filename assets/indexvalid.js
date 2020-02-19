@@ -43,9 +43,11 @@ form.classList.add('was-validated');
 var ldbtn = new ldLoader({root: "#submit-form"});
 
 function toggleAlert() {
+	alertify.set('notifier','position', 'bottom-center');
 	alertify.success('پیام شما با موفقیت ارسال گردید. با تشکر');
 }
 
 function toggleFail() {
+	alertify.set('notifier','position', 'bottom-center');
 	alertify.error('خطا! لطفا همه کادرها را کامل نمایید');
 }
